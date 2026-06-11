@@ -1,22 +1,31 @@
-#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 
 typedef struct {
-    char voc[27];
-    char word[50];
+    char *voc;
+    char *word;
 } Str;
 
 void percorrer(Str *select, char *strDef);
 void imprimir(Str *select, char *strDef);
-void escolherVocabulario();
+//void escolherVocabulario();
 void vocabulario(Str *select, char Voc[27]);
 
 int main(void) {
     char strDef[50];
     char strVoc[27];
-    Str user;
+    Str *state;
     char opcao;
+
+    state->voc = malloc(sizeof(char));
+    state->word = malloc(sizeof(char));
+
+    if(state->voc == NULL || state->word == NULL) {
+        printf("Sem memoria!");
+        exit(EXIT_FAILURE);
+    }
 
     printf("Deseja inserir um vocabulario?:\n");
     printf("1 - sim\n2 - nao (vocabulario padrao)\n");
@@ -24,24 +33,26 @@ int main(void) {
     scanf("%c", &opcao);
 
     if(opcao == '1') {
-        printf("Digite o vocabulário:\n");
-        printf("\n>> ");
+        printf("\nDigite o vocabulário:\n");
+        printf(">> ");
         scanf("%s", strVoc);
-        vocabulario(&user, strVoc);
+        vocabulario(state, strVoc);
     }
     else {
         strcpy(strVoc, "abcdefghijklmnopqrstuvwxyz");
-        vocabulario(&user, strVoc);
+        vocabulario(state, strVoc);
     }
         
-    printf("Digite uma palavra: ");
-
-    do {
+    printf("Digite uma palavra:");
+    while(1) {
         fgets(strDef, sizeof(strDef), stdin);
         strDef[strcspn(strDef, "\n")] = '\0';
-        percorrer(&user, strDef);
-        imprimir(&user, strDef);        
-    }while (1);
+        percorrer(state, strDef);
+        imprimir(state, strDef);
+    }      
+    
+    //free(user->voc);
+    //free(user->word);
 
     return 0;
 }
@@ -69,10 +80,7 @@ void percorrer(Str *select, char *strDef) {
 
 void imprimir(Str *select, char *strDef) {
     if(strcmp(select->word, strDef) == 0) {
-        for(int i = 0; select->word[i]; i++) {
-            printf(">> ");
-            putchar((*select).word[i]);      
-        }
+        printf(">> %s", (*select).word);
         putchar('\n');
     }
 }
