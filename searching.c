@@ -9,8 +9,9 @@ void vocabularios(char vocabulario[]);
 int main() {
   char *strInputVoc = malloc(sizeof(char));
   char *strInput = malloc(sizeof(char));
-  int length, op;
+  int length, op ;
 
+/*
   printf("1 - vocabulario padrao\n");
   printf("2 - adicionar vocabulario\n");
 
@@ -23,6 +24,9 @@ int main() {
     printf("Digite um vocabulario: ");
     scanf("%s", strInputVoc);
   }
+*/
+
+  strInputVoc = "abcdefghijklmnopqrstuvwxyz";
 
   printf("\nDigite uma palavra: ");
   scanf("%s", strInput);
@@ -36,20 +40,19 @@ int main() {
 }
 
 void comparar(char sequencia[], char vocabulario[], int tamanho) {
-  char seqcmp[tamanho];
+  char *seqcmp = malloc(sizeof(char));
   int c;
 
   for (int i = 0; i < sequencia[i]; i++) {
     for (int j = 0; i != tamanho; j++) {
       if (sequencia[i] == vocabulario[j]) {
         seqcmp[i] = sequencia[i];
+        //seqcmp[i] = vocabulario[j];
         j = 0;
         break;
       }
     }
   }
-    
-  seqcmp[strlen(seqcmp)] = '\0';
 
   c = strcmp(sequencia, seqcmp);
 
@@ -63,7 +66,6 @@ void comparar(char sequencia[], char vocabulario[], int tamanho) {
   for (int i = 0; i < seqcmp[i]; i++) {
     putchar(seqcmp[i]);
   }
-  
 
   putchar('\n');
 
