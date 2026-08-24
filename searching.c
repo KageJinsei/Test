@@ -47,7 +47,6 @@ void comparar(char sequencia[], char vocabulario[], int tamanho) {
     for (int j = 0; i != tamanho; j++) {
       if (sequencia[i] == vocabulario[j]) {
         seqcmp[i] = sequencia[i];
-        //seqcmp[i] = vocabulario[j];
         j = 0;
         break;
       }
@@ -61,15 +60,12 @@ void comparar(char sequencia[], char vocabulario[], int tamanho) {
   } else {
     printf("Palavra rejeitada!\n");
   }
-
   
   for (int i = 0; i < seqcmp[i]; i++) {
     putchar(seqcmp[i]);
   }
 
   putchar('\n');
-
-  printf("%d\n", c);
 }
 
 void vocabularios(char vocabulario[]);
